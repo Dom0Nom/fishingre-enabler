@@ -44,8 +44,11 @@ namespace MinecraftMonitor.Services
 
             Task.Run(() => MonitorLogAsync(instance, cts.Token));
 
-            Console.WriteLine($"[LogWatcher] Started watching {instance.Name} at {instance.LogPath}");
+            Console.WriteLine($"[LogWatcher] ========================================");
+            Console.WriteLine($"[LogWatcher] Started watching: {instance.Name}");
+            Console.WriteLine($"[LogWatcher] Log file: {instance.LogPath}");
             Console.WriteLine($"[LogWatcher] Initial position: {initialPos}");
+            Console.WriteLine($"[LogWatcher] ========================================");
         }
 
         public void StopWatching(InstanceConfig instance)
@@ -90,7 +93,11 @@ namespace MinecraftMonitor.Services
                                         {
                                             if (line.Contains(pattern, StringComparison.OrdinalIgnoreCase))
                                             {
-                                                Console.WriteLine($"[LogWatcher] EVENT DETECTED in {instance.Name}: {pattern}");
+                                                Console.WriteLine($"[LogWatcher] ==================== EVENT DETECTED ====================");
+                                                Console.WriteLine($"[LogWatcher] Instance: {instance.Name}");
+                                                Console.WriteLine($"[LogWatcher] Log File: {instance.LogPath}");
+                                                Console.WriteLine($"[LogWatcher] Pattern: {pattern}");
+                                                Console.WriteLine($"[LogWatcher] ======================================================");
                                                 EventDetected?.Invoke(instance);
                                                 break;
                                             }
