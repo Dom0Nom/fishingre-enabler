@@ -1,0 +1,19 @@
+# Build outputs
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# User-specific files
+*.user
+*.suo
+*.cache
+
+# IDE
+.vs/
+.vscode/
+
+# Dependencies
+packages/
+*.nupkg
