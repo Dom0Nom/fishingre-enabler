@@ -3,26 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="PrimaryBrush" Color="#CC0000"/>
+        <!-- AetherLink Color Scheme - Cyan to Purple Gradient -->
+        <SolidColorBrush x:Key="PrimaryBrush" Color="#3BA0E8"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#7B5FE8"/>
 
-        <!-- Red to Black Gradient Background -->
+        <!-- Blue-Purple to Black Gradient Background (matching logo) -->
         <LinearGradientBrush x:Key="BackgroundBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#660000" Offset="0"/>
-            <GradientStop Color="#330000" Offset="0.3"/>
-            <GradientStop Color="#1a0000" Offset="0.6"/>
-            <GradientStop Color="#000000" Offset="1"/>
+            <GradientStop Color="#1A2A44" Offset="0"/>
+            <GradientStop Color="#0F1A2E" Offset="0.3"/>
+            <GradientStop Color="#0A0F1A" Offset="0.6"/>
+            <GradientStop Color="#0D0D0D" Offset="1"/>
         </LinearGradientBrush>
 
-        <!-- Transparent dark surface to show gradient through -->
+        <!-- Transparent dark blue surface to show gradient through -->
         <LinearGradientBrush x:Key="SurfaceBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#33000000" Offset="0"/>
-            <GradientStop Color="#66000000" Offset="1"/>
+            <GradientStop Color="#22000033" Offset="0"/>
+            <GradientStop Color="#44000066" Offset="1"/>
         </LinearGradientBrush>
 
-        <!-- Light red text for readability -->
-        <SolidColorBrush x:Key="TextBrush" Color="#FF9999"/>
+        <!-- Light cyan-blue text for readability -->
+        <SolidColorBrush x:Key="TextBrush" Color="#A0D5F0"/>
 
-        <!-- Darker red for headers -->
-        <SolidColorBrush x:Key="HeaderBrush" Color="#FF6666"/>
+        <!-- Bright cyan for headers (matching logo) -->
+        <SolidColorBrush x:Key="HeaderBrush" Color="#5CB3E8"/>
     </Application.Resources>
 </Application>
