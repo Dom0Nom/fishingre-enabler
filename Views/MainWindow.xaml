@@ -6,7 +6,8 @@
         WindowStyle="None"
         ResizeMode="CanResize"
         AllowsTransparency="False"
-        BorderThickness="0">
+        BorderThickness="0"
+        Icon="../Resources/icon.ico">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"
