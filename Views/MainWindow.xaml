@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <!-- Custom Title Bar -->
-        <Border Grid.Row="0" Background="#110000" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+        <Border Grid.Row="0" Background="#001122" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -56,7 +56,7 @@
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#330000"/>
+                                        <Setter Property="Background" Value="#003366"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -79,7 +79,7 @@
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#330000"/>
+                                        <Setter Property="Background" Value="#003366"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -102,7 +102,7 @@
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#660000"/>
+                                        <Setter Property="Background" Value="#0066AA"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -129,7 +129,7 @@
                        Margin="0,0,0,16"/>
 
         <!-- Settings Panel -->
-        <Border Grid.Row="1" Background="#33000000"
+        <Border Grid.Row="1" Background="#00336600"
                 Padding="16" Margin="0,0,0,16" CornerRadius="4">
             <StackPanel>
                 <TextBlock Text="Settings" FontSize="18" FontWeight="Bold"
@@ -150,23 +150,23 @@
                                Foreground="{StaticResource TextBrush}"/>
                     <TextBox Grid.Column="1" Text="{Binding PrismLauncherPath}"
                              Margin="0,0,16,0" Padding="4"
-                             Background="#220000" Foreground="{StaticResource TextBrush}"
-                             BorderBrush="#440000" BorderThickness="1"/>
+                             Background="#002244" Foreground="{StaticResource TextBrush}"
+                             BorderBrush="#004488" BorderThickness="1"/>
 
                     <TextBlock Grid.Column="2" Text="Key:"
                                VerticalAlignment="Center" Margin="0,0,8,0"
                                Foreground="{StaticResource TextBrush}"/>
                     <TextBox Grid.Column="3" Text="{Binding KeyToSend}"
                              Margin="0,0,16,0" Padding="4"
-                             Background="#220000" Foreground="{StaticResource TextBrush}"
-                             BorderBrush="#440000" BorderThickness="1"/>
+                             Background="#002244" Foreground="{StaticResource TextBrush}"
+                             BorderBrush="#004488" BorderThickness="1"/>
 
                     <TextBlock Grid.Column="4" Text="IPC Port:"
                                VerticalAlignment="Center" Margin="0,0,8,0"
                                Foreground="{StaticResource TextBrush}"/>
                     <TextBox Grid.Column="5" Text="{Binding IpcPort}" Padding="4"
-                             Background="#220000" Foreground="{StaticResource TextBrush}"
-                             BorderBrush="#440000" BorderThickness="1"/>
+                             Background="#002244" Foreground="{StaticResource TextBrush}"
+                             BorderBrush="#004488" BorderThickness="1"/>
                 </Grid>
 
                 <StackPanel Orientation="Horizontal">
@@ -183,7 +183,7 @@
         </Border>
 
         <!-- Instances DataGrid -->
-        <Border Grid.Row="2" Background="#22000000" Margin="0,0,0,16">
+        <Border Grid.Row="2" Background="#00224400" Margin="0,0,0,16">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -202,12 +202,12 @@
                           GridLinesVisibility="None"
                           Background="Transparent"
                           Foreground="{StaticResource TextBrush}"
-                          RowBackground="#22000000"
-                          AlternatingRowBackground="#33000000"
+                          RowBackground="#00224400"
+                          AlternatingRowBackground="#00336600"
                           BorderThickness="0">
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="Background" Value="#440000"/>
+                            <Setter Property="Background" Value="#004488"/>
                             <Setter Property="Foreground" Value="{StaticResource HeaderBrush}"/>
                             <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Padding" Value="8,4"/>
@@ -244,12 +244,12 @@
                       GridLinesVisibility="None"
                       Background="Transparent"
                       Foreground="{StaticResource TextBrush}"
-                      RowBackground="#22000000"
-                      AlternatingRowBackground="#33000000"
+                      RowBackground="#00224400"
+                      AlternatingRowBackground="#00336600"
                       BorderThickness="0">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#440000"/>
+                        <Setter Property="Background" Value="#004488"/>
                         <Setter Property="Foreground" Value="{StaticResource HeaderBrush}"/>
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="Padding" Value="8,4"/>
