@@ -1,7 +1,7 @@
 using System;
 using System.Windows;
 
-namespace MinecraftMonitor
+namespace AetherLinkMonitor
 {
     public partial class App : Application
     {

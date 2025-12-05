@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Input;
 
-namespace MinecraftMonitor.Helpers
+namespace AetherLinkMonitor.Helpers
 {
     public class RelayCommand : ICommand
     {

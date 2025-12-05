@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MinecraftMonitor.Services
+namespace AetherLinkMonitor.Services
 {
     public class IpcService
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace MinecraftMonitor.Models
+namespace AetherLinkMonitor.Models
 {
     public enum LogLevel
     {

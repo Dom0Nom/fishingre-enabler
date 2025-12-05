@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using MinecraftMonitor.Models;
+using AetherLinkMonitor.Models;
 using Newtonsoft.Json;
 
-namespace MinecraftMonitor.Services
+namespace AetherLinkMonitor.Services
 {
     public class ConfigService
     {

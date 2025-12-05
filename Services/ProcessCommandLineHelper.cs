@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace MinecraftMonitor.Services
+namespace AetherLinkMonitor.Services
 {
     public static class ProcessCommandLineHelper
     {

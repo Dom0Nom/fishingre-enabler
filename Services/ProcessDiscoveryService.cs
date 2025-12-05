@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Timers;
-using MinecraftMonitor.Models;
+using AetherLinkMonitor.Models;
 
-namespace MinecraftMonitor.Services
+namespace AetherLinkMonitor.Services
 {
     public class ProcessDiscoveryService
     {

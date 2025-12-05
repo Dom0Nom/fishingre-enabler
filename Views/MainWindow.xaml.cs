@@ -1,9 +1,9 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
-using MinecraftMonitor.ViewModels;
+using AetherLinkMonitor.ViewModels;
 
-namespace MinecraftMonitor.Views
+namespace AetherLinkMonitor.Views
 {
     public partial class MainWindow : Window
     {

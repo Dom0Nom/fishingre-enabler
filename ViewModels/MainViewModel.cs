@@ -5,11 +5,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using MinecraftMonitor.Helpers;
-using MinecraftMonitor.Models;
-using MinecraftMonitor.Services;
+using AetherLinkMonitor.Helpers;
+using AetherLinkMonitor.Models;
+using AetherLinkMonitor.Services;
 
-namespace MinecraftMonitor.ViewModels
+namespace AetherLinkMonitor.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {

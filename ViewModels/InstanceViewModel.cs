@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using MinecraftMonitor.Models;
+using AetherLinkMonitor.Models;
 
-namespace MinecraftMonitor.ViewModels
+namespace AetherLinkMonitor.ViewModels
 {
     public class InstanceViewModel : INotifyPropertyChanged
     {

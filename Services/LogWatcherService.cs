@@ -4,9 +4,9 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using MinecraftMonitor.Models;
+using AetherLinkMonitor.Models;
 
-namespace MinecraftMonitor.Services
+namespace AetherLinkMonitor.Services
 {
     public class LogWatcherService
     {

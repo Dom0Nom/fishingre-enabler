@@ -1,4 +1,4 @@
-namespace MinecraftMonitor.Models
+namespace AetherLinkMonitor.Models
 {
     public class AppConfig
     {

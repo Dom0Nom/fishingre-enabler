@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
-namespace MinecraftMonitor.Services
+namespace AetherLinkMonitor.Services
 {
     public class WindowService
     {
