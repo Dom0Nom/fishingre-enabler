@@ -80,6 +80,7 @@ namespace AetherLinkMonitor.ViewModels
             _processDiscoveryService.ProcessLost += OnProcessLost;
 
             _logWatcherService.EventDetected += OnEventDetected;
+            _logWatcherService.BlueRingedOctopusDetected += OnBlueRingedOctopusDetected;
 
             _ipcService.SequenceCompleted += OnSequenceCompleted;
             _ipcService.ClientConnectionChanged += OnClientConnectionChanged;
@@ -133,7 +134,7 @@ namespace AetherLinkMonitor.ViewModels
                     {
                         var state = new InstanceState();
                         vm = new InstanceViewModel(config, state);
-                        _logWatcherService.StartWatching(config);
+                        _logWatcherService.StartWatching(config, state);
                     }
 
                     Instances.Add(vm);
@@ -158,7 +159,7 @@ namespace AetherLinkMonitor.ViewModels
                     var state = new InstanceState();
                     vm = new InstanceViewModel(instance, state);
                     Instances.Add(vm);
-                    _logWatcherService.StartWatching(instance);
+                    _logWatcherService.StartWatching(instance, state);
                 }
 
                 var hadProcess = vm.ProcessId.HasValue;
@@ -233,6 +234,28 @@ namespace AetherLinkMonitor.ViewModels
                     vm.State.FirstEventTime = now;
                     vm.EventCount = 1;
                     AddLog(LogLevel.Info, instance.Name, "Third+ event detected, resetting to first event");
+                }
+            });
+        }
+
+        private async void OnBlueRingedOctopusDetected(InstanceConfig instance)
+        {
+            var vm = Instances.FirstOrDefault(i => i.Name == instance.Name);
+            if (vm == null || !vm.IsEnabled) return;
+
+            await System.Windows.Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                vm.LastEventTime = DateTime.Now;
+                AddLog(LogLevel.Info, instance.Name, "[BRO] Blue Ringed Octopus sequence detected, sending key");
+
+                if (vm.WindowHandle != IntPtr.Zero)
+                {
+                    _windowService.SendKey(vm.WindowHandle, _config.KeyToSend);
+                    AddLog(LogLevel.Info, instance.Name, $"[BRO] Sent key: {_config.KeyToSend}");
+                }
+                else
+                {
+                    AddLog(LogLevel.Warning, instance.Name, "[BRO] Window handle not found, cannot send key");
                 }
             });
         }
