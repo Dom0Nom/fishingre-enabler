@@ -14,6 +14,16 @@ namespace AetherLinkMonitor.Models
         public bool IsProcessFound => ProcessId.HasValue;
         public bool IsWindowFound => WindowHandle != IntPtr.Zero;
 
+        // Hotspot Mismatch event tracking
+        public DateTime? HotspotMismatchFirstTime { get; set; }
+        public int HotspotMismatchCount { get; set; }
+
+        public void ResetHotspotMismatch()
+        {
+            HotspotMismatchFirstTime = null;
+            HotspotMismatchCount = 0;
+        }
+
         // Blue Ringed Octopus event tracking
         public DateTime? BroStep1Time { get; set; }  // "You were killed by Blue Ringed Octopus"
         public DateTime? BroStep2Time { get; set; }  // "Disabling Route Executor"

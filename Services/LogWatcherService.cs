@@ -26,8 +26,14 @@ namespace AetherLinkMonitor.Services
         private const string BRO_STEP3 = "Fishing: §cDisabled";
         private const int BRO_SEQUENCE_WINDOW_SECONDS = 10;
 
+        // Hotspot Mismatch pattern
+        private const string HOTSPOT_MISMATCH = "Predicted hotspot doesn't seem to match the actual hotspot";
+        private const int HOTSPOT_MISMATCH_THRESHOLD = 5;
+        private const int HOTSPOT_MISMATCH_WINDOW_SECONDS = 5;
+
         public event Action<InstanceConfig>? EventDetected;
         public event Action<InstanceConfig>? BlueRingedOctopusDetected;
+        public event Action<InstanceConfig>? HotspotMismatchDetected;
 
         public void StartWatching(InstanceConfig instance, InstanceState state)
         {
@@ -115,6 +121,9 @@ namespace AetherLinkMonitor.Services
 
                                         // Check for Blue Ringed Octopus sequence patterns
                                         CheckBlueRingedOctopusSequence(instance, line);
+
+                                        // Check for Hotspot Mismatch pattern
+                                        CheckHotspotMismatch(instance, line);
                                     }
                                 }
 
@@ -207,6 +216,47 @@ namespace AetherLinkMonitor.Services
                     state.ResetBroSequence();
                 }
                 return;
+            }
+        }
+
+        private void CheckHotspotMismatch(InstanceConfig instance, string line)
+        {
+            if (!_instanceStates.TryGetValue(instance.Name, out var state))
+                return;
+
+            // Check if line contains the hotspot mismatch pattern
+            if (!line.Contains(HOTSPOT_MISMATCH, StringComparison.OrdinalIgnoreCase))
+                return;
+
+            var now = DateTime.Now;
+
+            // If this is the first occurrence or window expired, reset
+            if (!state.HotspotMismatchFirstTime.HasValue ||
+                (now - state.HotspotMismatchFirstTime.Value).TotalSeconds > HOTSPOT_MISMATCH_WINDOW_SECONDS)
+            {
+                state.HotspotMismatchFirstTime = now;
+                state.HotspotMismatchCount = 1;
+                Console.WriteLine($"[LogWatcher] [Hotspot] First mismatch detected for {instance.Name} (1/{HOTSPOT_MISMATCH_THRESHOLD})");
+                return;
+            }
+
+            // Increment count
+            state.HotspotMismatchCount++;
+            Console.WriteLine($"[LogWatcher] [Hotspot] Mismatch detected for {instance.Name} ({state.HotspotMismatchCount}/{HOTSPOT_MISMATCH_THRESHOLD})");
+
+            // Check if threshold reached
+            if (state.HotspotMismatchCount >= HOTSPOT_MISMATCH_THRESHOLD)
+            {
+                Console.WriteLine($"[LogWatcher] [Hotspot] ==================== HOTSPOT MISMATCH THRESHOLD REACHED ====================");
+                Console.WriteLine($"[LogWatcher] [Hotspot] Instance: {instance.Name}");
+                Console.WriteLine($"[LogWatcher] [Hotspot] {state.HotspotMismatchCount} occurrences in {HOTSPOT_MISMATCH_WINDOW_SECONDS} seconds");
+                Console.WriteLine($"[LogWatcher] [Hotspot] ============================================================================");
+
+                // Trigger the Hotspot Mismatch event
+                HotspotMismatchDetected?.Invoke(instance);
+
+                // Reset counter after triggering
+                state.ResetHotspotMismatch();
             }
         }
     }

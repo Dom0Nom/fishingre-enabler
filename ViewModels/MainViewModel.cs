@@ -81,6 +81,7 @@ namespace AetherLinkMonitor.ViewModels
 
             _logWatcherService.EventDetected += OnEventDetected;
             _logWatcherService.BlueRingedOctopusDetected += OnBlueRingedOctopusDetected;
+            _logWatcherService.HotspotMismatchDetected += OnHotspotMismatchDetected;
 
             _ipcService.SequenceCompleted += OnSequenceCompleted;
             _ipcService.ClientConnectionChanged += OnClientConnectionChanged;
@@ -256,6 +257,36 @@ namespace AetherLinkMonitor.ViewModels
                 else
                 {
                     AddLog(LogLevel.Warning, instance.Name, "[BRO] Window handle not found, cannot send key");
+                }
+            });
+        }
+
+        private async void OnHotspotMismatchDetected(InstanceConfig instance)
+        {
+            var vm = Instances.FirstOrDefault(i => i.Name == instance.Name);
+            if (vm == null || !vm.IsEnabled) return;
+
+            await System.Windows.Application.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                vm.LastEventTime = DateTime.Now;
+                AddLog(LogLevel.Info, instance.Name, "[Hotspot] Mismatch threshold reached, pressing 'w' twice");
+
+                if (vm.WindowHandle != IntPtr.Zero)
+                {
+                    // Press 'w' first time
+                    _windowService.SendKey(vm.WindowHandle, "W");
+                    AddLog(LogLevel.Info, instance.Name, "[Hotspot] Sent key: W (1/2)");
+
+                    // Small delay between key presses
+                    await Task.Delay(100);
+
+                    // Press 'w' second time
+                    _windowService.SendKey(vm.WindowHandle, "W");
+                    AddLog(LogLevel.Info, instance.Name, "[Hotspot] Sent key: W (2/2)");
+                }
+                else
+                {
+                    AddLog(LogLevel.Warning, instance.Name, "[Hotspot] Window handle not found, cannot send key");
                 }
             });
         }
