@@ -221,42 +221,34 @@ namespace AetherLinkMonitor.Services
 
         private void CheckHotspotMismatch(InstanceConfig instance, string line)
         {
-            if (!_instanceStates.TryGetValue(instance.Name, out var state))
-                return;
-
             // Check if line contains the hotspot mismatch pattern
             if (!line.Contains(HOTSPOT_MISMATCH, StringComparison.OrdinalIgnoreCase))
                 return;
 
-            var now = DateTime.Now;
+            // Minecraft stacks repeated messages and adds a counter like "(5)" at the end
+            // Example: "...finding a new one... (5)"
+            // We need to parse that counter
+            int count = 1; // Default to 1 if no counter found
 
-            // If this is the first occurrence or window expired, reset
-            if (!state.HotspotMismatchFirstTime.HasValue ||
-                (now - state.HotspotMismatchFirstTime.Value).TotalSeconds > HOTSPOT_MISMATCH_WINDOW_SECONDS)
+            // Look for pattern like " (X)" at the end of the line
+            var match = Regex.Match(line, @"\((\d+)\)\s*$");
+            if (match.Success)
             {
-                state.HotspotMismatchFirstTime = now;
-                state.HotspotMismatchCount = 1;
-                Console.WriteLine($"[LogWatcher] [Hotspot] First mismatch detected for {instance.Name} (1/{HOTSPOT_MISMATCH_THRESHOLD})");
-                return;
+                count = int.Parse(match.Groups[1].Value);
             }
 
-            // Increment count
-            state.HotspotMismatchCount++;
-            Console.WriteLine($"[LogWatcher] [Hotspot] Mismatch detected for {instance.Name} ({state.HotspotMismatchCount}/{HOTSPOT_MISMATCH_THRESHOLD})");
+            Console.WriteLine($"[LogWatcher] [Hotspot] Mismatch detected for {instance.Name} - count: {count}/{HOTSPOT_MISMATCH_THRESHOLD}");
 
-            // Check if threshold reached
-            if (state.HotspotMismatchCount >= HOTSPOT_MISMATCH_THRESHOLD)
+            // Trigger if count reaches threshold
+            if (count >= HOTSPOT_MISMATCH_THRESHOLD)
             {
                 Console.WriteLine($"[LogWatcher] [Hotspot] ==================== HOTSPOT MISMATCH THRESHOLD REACHED ====================");
                 Console.WriteLine($"[LogWatcher] [Hotspot] Instance: {instance.Name}");
-                Console.WriteLine($"[LogWatcher] [Hotspot] {state.HotspotMismatchCount} occurrences in {HOTSPOT_MISMATCH_WINDOW_SECONDS} seconds");
+                Console.WriteLine($"[LogWatcher] [Hotspot] Minecraft counter shows: ({count})");
                 Console.WriteLine($"[LogWatcher] [Hotspot] ============================================================================");
 
                 // Trigger the Hotspot Mismatch event
                 HotspotMismatchDetected?.Invoke(instance);
-
-                // Reset counter after triggering
-                state.ResetHotspotMismatch();
             }
         }
     }
