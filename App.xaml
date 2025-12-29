@@ -3,28 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <!-- AetherLink Color Scheme - Cyan to Purple Gradient -->
-        <SolidColorBrush x:Key="PrimaryBrush" Color="#3BA0E8"/>
-        <SolidColorBrush x:Key="AccentBrush" Color="#7B5FE8"/>
+        <!-- Black and White Color Scheme -->
+        <SolidColorBrush x:Key="PrimaryBrush" Color="#555555"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#777777"/>
 
-        <!-- Blue-Purple to Black Gradient Background (matching logo) -->
+        <!-- Black to Dark Gray Gradient Background -->
         <LinearGradientBrush x:Key="BackgroundBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#1A2A44" Offset="0"/>
-            <GradientStop Color="#0F1A2E" Offset="0.3"/>
-            <GradientStop Color="#0A0F1A" Offset="0.6"/>
-            <GradientStop Color="#0D0D0D" Offset="1"/>
+            <GradientStop Color="#000000" Offset="0"/>
+            <GradientStop Color="#0D0D0D" Offset="0.5"/>
+            <GradientStop Color="#1A1A1A" Offset="1"/>
         </LinearGradientBrush>
 
-        <!-- Transparent dark blue surface to show gradient through -->
+        <!-- Dark gray surface -->
         <LinearGradientBrush x:Key="SurfaceBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#22000033" Offset="0"/>
-            <GradientStop Color="#44000066" Offset="1"/>
+            <GradientStop Color="#1A1A1A" Offset="0"/>
+            <GradientStop Color="#2A2A2A" Offset="1"/>
         </LinearGradientBrush>
 
-        <!-- Light cyan-blue text for readability -->
-        <SolidColorBrush x:Key="TextBrush" Color="#A0D5F0"/>
+        <!-- Light gray text for readability -->
+        <SolidColorBrush x:Key="TextBrush" Color="#CCCCCC"/>
 
-        <!-- Bright cyan for headers (matching logo) -->
-        <SolidColorBrush x:Key="HeaderBrush" Color="#5CB3E8"/>
+        <!-- White for headers -->
+        <SolidColorBrush x:Key="HeaderBrush" Color="#FFFFFF"/>
     </Application.Resources>
 </Application>
