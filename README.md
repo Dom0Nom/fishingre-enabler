@@ -1,4 +1,4 @@
-# Fishing Re-Enabler
+# Macro Re-Enabler
 
 A system that monitors Minecraft instances and automatically re-enables a macro when certain events are detected in the game logs.
 
